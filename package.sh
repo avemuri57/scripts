@@ -6,6 +6,7 @@ mkdir public
 mkdir app/models
 mkdir public/css
 mkdir public/js
+mkdir public/js/controllers
 mkdir public/img
 mkdir public/views
 
@@ -63,21 +64,58 @@ routes='module.exports = function(app) {\n
         });\n
     };\n'
 index='<!doctype html>\n
-<html lang="en">\n
-<head>\n
-    <meta charset="UTF-8">\n
-    <title>Anands JS App</title>\n
-</head>\n
-<body>\n
+ <html lang="en">\n
+ <head>\n
+  <meta charset="UTF-8">\n
+  <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">\n
+  <script src="libs/angular/angular.min.js"></script>\n
+  <script src="libs/angular-route/angular-route.min.js"></script>\n
+  <script src="libs/angular-cookies/angular-cookies.min.js"></script>\n
+  <script src="js/controllers/MainCtrl.js"></script>\n
+  <script src="js/controllers/MainCtrl.js"></script>\n
+    <script src="js/appRoutes.js"></script>\n
+  <script src="js/app.js"></script>\n
+   <base href="/">\n
+  <title>Anands JS App</title>\n
+ </head>\n
+<body ng-app="App" ng-controller="MainController">\n
+ <div ng-view></div>\n
+</body>\n
+ </html>'
+ home='<div>\n
     <h1>Welcome to Vemuri Enterprises</h1>\n
-</body>'
+</div>'
+app='angular.module("App", [ "ngRoute","MainCtrl","appRoutes","ngCookies"]);'
+appRoutes='angular.module("appRoutes", []).config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {\n\n
 
+  $routeProvider\n\n
+
+    // home page\n
+    .when("/", {\n
+      templateUrl: "views/home.html",\n
+      controller: "MainController"\n
+    })\n\n
+  
+  $locationProvider.html5Mode(true);\n\n
+
+}]);'
+
+mainctrl='angular.module("MainCtrl", ["ngCookies"]).controller("MainController",["$scope","$http", function($scope,$http) {\n\n
+
+  $scope.tagline = "Have Fun Hacking Away!"; \n\n
+
+}]);'
 echo $bower >>bower.json
 echo $bowerrc>>.bowerrc
 echo $text >>package.json
 echo $server >>server.js
 echo $routes >>./app/routes.js
 echo $index >>public/views/index.html
+echo $app>>public/js/app.js
+echo $appRoutes>>public/js/appRoutes.js
+echo $home>>public/views/home.html
+echo $mainctrl> public/js/controllers/MainCtrl.js
+
 
 npm install
 bower install
