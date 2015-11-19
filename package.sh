@@ -84,6 +84,7 @@ index='<!doctype html>\n
  </html>'
  home='<div>\n
     <h1>Welcome to Vemuri Enterprises</h1>\n
+    <h2>{{tagline}}</h2>\n
 </div>'
 app='angular.module("App", [ "ngRoute","MainCtrl","appRoutes","ngCookies"]);'
 appRoutes='angular.module("appRoutes", []).config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {\n\n
